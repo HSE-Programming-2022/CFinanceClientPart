@@ -49,7 +49,10 @@ namespace CFinanceClient.Design
             var company = await CompanySession.GetCompanyTask(ticker);
 
             if (company != null)
-                Test.Content = company.Name;
+            {
+                List<PriceHistoryData> prices = await company.GetHistoryPriceAsync();
+                Test.Content = prices[0].High;
+            }
             else
                 Test.Content = "Not found";
         }

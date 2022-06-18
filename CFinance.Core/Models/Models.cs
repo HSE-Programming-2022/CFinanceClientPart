@@ -1,12 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Runtime.CompilerServices;
 using System.Text;
-using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using ServiceStack;
 
 namespace CFinance.Core.Models
 {
+
+    public class PriceHistoryData
+    {
+        public DateTime Timestamp { get; set; }
+        public decimal Open { get; set; }
+
+        public decimal High { get; set; }
+        public decimal Low { get; set; }
+
+        public decimal Close { get; set; }
+        public decimal Volume { get; set; }
+
+    }
     public class User
     {
         public int UserID { get; set; }
@@ -32,7 +49,16 @@ namespace CFinance.Core.Models
         public BalanceSheet BalanceSheet { get; set; }
 
 
+        public async Task<List<PriceHistoryData>> GetHistoryPriceAsync()
+        {
+            string apiKey = "TDM8L7KVPP1QD1TT";
+            var GetPriceTask = await $"https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol={this.Ticker}&apikey={apiKey}&datatype=csv"
+                .GetStringFromUrlAsync();
 
+            var monthlyPrices = GetPriceTask.FromCsv<List<PriceHistoryData>>();
+
+            return monthlyPrices;
+        }
     }
 
     public class Cashflows
