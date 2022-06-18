@@ -11,7 +11,7 @@ namespace CFinance.Core
 {
     public static class UserSession
     {
-        private static readonly string BaseUri = "https://localhost:5100/User";
+        private static readonly string BaseUri = "https://cfinance-api.herokuapp.com/User";
         static HttpClient HttpClient = new HttpClient();
         public static async Task<User> LoginUser(string username, string password)
         {
@@ -45,7 +45,7 @@ namespace CFinance.Core
 
     public static class CompanySession
     {
-        private static readonly string BaseUri = "https://localhost:5100/Company";
+        private static readonly string BaseUri = "https://cfinance-api.herokuapp.com/Company";
         static HttpClient HttpClient = new HttpClient();
 
         public static async Task<Company> GetCompanyTask(string ticker)
