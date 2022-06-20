@@ -3,23 +3,32 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Formatting;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 using Newtonsoft.Json;
 using ServiceStack;
 
 namespace CFinance.Core.Models
 {
+    public class NewsPost
+    {
+        public string Title;
+        public string PostUrl;
+        public string? TimePublished;
+        public string? Summary;
+        public BitmapImage? Image;
+        public string SentimentLabel;
+    }
 
     public class PriceHistoryData
     {
         public DateTime Timestamp { get; set; }
         public decimal Open { get; set; }
-
         public decimal High { get; set; }
         public decimal Low { get; set; }
-
         public decimal Close { get; set; }
         public decimal Volume { get; set; }
 
@@ -48,16 +57,40 @@ namespace CFinance.Core.Models
         public IncomeStatement IncomeStatement { get; set; }
         public BalanceSheet BalanceSheet { get; set; }
 
+        private readonly string apiKey = "TDM8L7KVPP1QD1TT";
 
         public async Task<List<PriceHistoryData>> GetHistoryPriceAsync()
         {
-            string apiKey = "TDM8L7KVPP1QD1TT";
+            
             var GetPriceTask = await $"https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol={this.Ticker}&apikey={apiKey}&datatype=csv"
                 .GetStringFromUrlAsync();
 
             var monthlyPrices = GetPriceTask.FromCsv<List<PriceHistoryData>>();
 
             return monthlyPrices;
+        }
+
+        public async Task<List<NewsPost>> GetCompanyNewsAsync(int amount)
+        {
+            List<NewsPost> resultFeed = new List<NewsPost>();
+
+            var GetNewsFeed = await $"https://www.alphavantage.co/query?function=NEWS_SENTIMENT&tickers={this.Ticker}&limit={amount}&apikey={this.apiKey}"
+                        .GetStringFromUrlAsync();
+            dynamic newsFeed = JsonConvert.DeserializeObject(GetNewsFeed);
+
+            foreach (var post in newsFeed.feed)
+            {
+                resultFeed.Add(new NewsPost()
+                {
+                    Title = post.title,
+                    Image = new BitmapImage(new Uri(post.banner_image)),
+                    PostUrl = post.url,
+                    TimePublished = post.time_published,
+                    Summary = post.summary,
+                    SentimentLabel = post.overall_sentiment_label
+                });
+            }
+            return resultFeed;
         }
     }
 
