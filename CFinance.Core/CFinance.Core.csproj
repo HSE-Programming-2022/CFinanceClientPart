@@ -11,4 +11,13 @@
     <PackageReference Include="ServiceStack.Text" Version="6.1.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="PythonModelConnector\BoostingRegression.py">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="PythonModelConnector\PriceParsing.py">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

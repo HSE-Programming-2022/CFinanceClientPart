@@ -12,14 +12,15 @@ namespace CFinance.Core.PythonModelConnector
 {
     public static class PythonRegressionBoosting
     {
-        private static string EnvPath = "C:\\Users\\Adedal\\AppData\\Local\\Programs\\Python\\Python310\\python.exe"
-        private static string scriptName = "model.py";
+        private static string EnvPath = "C:\\Users\\Adedal\\AppData\\Local\\Programs\\Python\\Python310\\python.exe";
+        private static string scriptName = "PythonModelConnector\\BoostingRegression.py";
 
-        public static float EstimateFuturePrice(string ticker)
+        public static string EstimateFuturePrice(string ticker)
         {
             ProcessStartInfo start = new ProcessStartInfo();
 
-            start.Arguments = $"\"{scriptName}\" \"{ticker}\"";
+            start.FileName = EnvPath;
+            start.Arguments = $"\"{scriptName}\" {ticker}";
             start.UseShellExecute = false;
             start.CreateNoWindow = true;
             start.RedirectStandardOutput = true;
@@ -32,7 +33,8 @@ namespace CFinance.Core.PythonModelConnector
                     string stderr = process.StandardError.ReadToEnd();
                     string result = reader.ReadToEnd();
                     
-                    return float.Parse(result);
+
+                    return result;
                 }
             }
         }

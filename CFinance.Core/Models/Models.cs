@@ -66,7 +66,7 @@ namespace CFinance.Core.Models
                 .GetStringFromUrlAsync();
 
             var monthlyPrices = GetPriceTask.FromCsv<List<PriceHistoryData>>();
-
+            
             return monthlyPrices;
         }
 
