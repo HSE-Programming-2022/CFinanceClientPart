@@ -7,9 +7,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="PythonModelConnector\requirements.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.9" />
     <PackageReference Include="Qiwi.BillPayments" Version="0.1.5" />
     <PackageReference Include="ServiceStack.Text" Version="6.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="PythonModelConnector\requirements.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>
