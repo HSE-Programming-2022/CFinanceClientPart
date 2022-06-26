@@ -40,7 +40,6 @@ namespace CFinance.Core.PaymentProcedure
 
             psi.UseShellExecute = true;
             psi.FileName = paymentForm.ToString();
-            System.Diagnostics.Process.Start(psi);
 
             if (paymentForm != null)
             {

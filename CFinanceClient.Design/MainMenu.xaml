@@ -9,7 +9,7 @@
       Height="1000"
       Title="MainMenu">
 
-    <Grid Background="#202020">
+    <Grid Background="#181818">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -67,7 +67,7 @@
                 </ListBox.ItemContainerStyle>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Border Width="120" Height="90" Background="#181818" BorderThickness="1,1,1,1" CornerRadius="8">
+                        <Border Width="120" Height="90" Background="#202020" BorderThickness="1,1,1,1" CornerRadius="8">
                             <StackPanel Background="Transparent">
                                 <Label Name="CompanyTicker" Style="{StaticResource CompanyTicker}" Foreground="White" Initialized="CompanyTicker_OnInitialized"/>
                                 <Label Name="CompanyName" Style="{StaticResource CompanyName}" Foreground="White" Initialized="CompanyName_OnInitialized"/>
@@ -78,13 +78,16 @@
             </ListBox>
             
             <Label Style="{StaticResource Header}" Content="Портфели" Grid.Row="1"/>
+            <Button Style="{StaticResource RegularButton}" Grid.Row="1" HorizontalAlignment="Right" Width="40" Name="RefreshPortfolios" Click="RefreshPortfolios_OnClick">
+                <Image Source="resources/refresh.png"/>
+            </Button>
             <Grid Grid.Row="2" Height="300">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <ListBox Height="300" Grid.Row="0"  Name="Portfolios" Style="{StaticResource CompanyCards}" BorderThickness="0 0 0 0"   ItemsSource="{Binding}">
+                <ListBox Height="300" Grid.Row="0"  Name="Portfolios" Style="{StaticResource CompanyCards}" BorderThickness="0 0 0 0"   ItemsSource="{Binding ElementName=UserPortfolios}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <UniformGrid Columns="3"/>

@@ -21,7 +21,7 @@ namespace CFinance.Core
             List<Portfolio> userPortfolios = new List<Portfolio>();
 
             StringBuilder builder = new StringBuilder(BaseUri);
-            builder.Append($"/Portfolio/GetUserPortfolios?uid={uid}");
+            builder.Append($"/GetUserPortfolios?uid={uid}");
 
             HttpResponseMessage response = await client.GetAsync(builder.ToString());
 

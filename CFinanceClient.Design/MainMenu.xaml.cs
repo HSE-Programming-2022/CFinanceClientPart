@@ -36,9 +36,9 @@ namespace CFinanceClient.Design
             WelcomeLabel.Content = $"Добро пожаловать, {currentUser.UserName}";
 
             CurrentUser = currentUser;
-
-            this.DataContext = CurrentUser.Portfolios;
             
+            Portfolios.ItemsSource = CurrentUser.Portfolios;
+
             this.ShowNewsFeed();
             this.SetUpCompanyList();
         }
@@ -142,7 +142,6 @@ namespace CFinanceClient.Design
 
                 psi.UseShellExecute = true;
                 psi.FileName = selectedPost.PostUrl;
-                System.Diagnostics.Process.Start(psi);
 
                 if (selectedPost != null)
                 {
@@ -204,12 +203,9 @@ namespace CFinanceClient.Design
                 }
                 else
                 {
-                    UserPortfolios = await PortfolioSession.GetPortfoliosForUser(CurrentUser.UserID);
                     NewPortfolioNameField.Text = "";
-                    
-                    CurrentUser.Portfolios.Add(new Portfolio() {Name=name,PortfolioID=newPortfolioId,UserID = CurrentUser.UserID});
 
-                    Portfolios.ItemsSource = CurrentUser.Portfolios;
+                    CurrentUser.Portfolios.Add(new Portfolio() { Name = name, PortfolioID = newPortfolioId, UserID = CurrentUser.UserID });
                 }
             }
         }
@@ -223,6 +219,13 @@ namespace CFinanceClient.Design
             PortfolioWindow newPortfolioWindow = new PortfolioWindow(selectedPortfolio, availableCompanies);
 
             newPortfolioWindow.Show();
+        }
+
+        private async void RefreshPortfolios_OnClick(object sender, RoutedEventArgs e)
+        {
+            List<Portfolio> currentUserPortfolios = await PortfolioSession.GetPortfoliosForUser(CurrentUser.UserID);
+
+            Portfolios.ItemsSource = currentUserPortfolios;
         }
     }
 }

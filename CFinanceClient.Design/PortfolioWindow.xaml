@@ -21,7 +21,7 @@
         
         <Label Grid.Row="0" Style="{StaticResource Header}" Content="Портфель" />
 
-        <Label Name="PortfolioName" HorizontalAlignment="Left" Grid.Row="1" Style="{StaticResource FinanceHeader}" Content="{Binding Path=PortfolioID}"/>
+        <Label Name="PortfolioName" HorizontalAlignment="Left" Grid.Row="1" Style="{StaticResource FinanceHeader}" Content="{Binding Path=Name}"/>
 
         <ListBox Name="PortfolioCompanies"  Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" BorderThickness="0 0 0 0" ItemsSource="{Binding Path=CompaniesView}" >
             <ItemsControl.ItemTemplate>
