@@ -1,0 +1,174 @@
+﻿<Page x:Class="CFinanceClient.Design.CompanyProfile"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CFinanceClient.Design"
+      xmlns:oxy="clr-namespace:OxyPlot.Wpf;assembly=OxyPlot.Wpf"
+      mc:Ignorable="d" 
+      d:DesignHeight="1004" d:DesignWidth="1000"
+      Height="1000"
+      Title="CompanyProfile"
+      Background="#202020">
+    <ScrollViewer CanContentScroll="True">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="10"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Name="BackButton" Grid.Row="0" HorizontalAlignment="Left" Style="{StaticResource RegularButton}" Height="30" Width="50" Content="Назад" Click="BackButton_OnClick"/>
+            <Grid Grid.Column="0" Grid.Row="1" Margin="20 10 0 0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label Name="CompanyTicker"  Grid.Row="0" Style="{StaticResource ProfileTicker}" HorizontalAlignment="Left"/>
+                <Label Name="CompanyName" Grid.Row="1" Style="{StaticResource ProfileName}" HorizontalAlignment="Left"/>
+                <Label Grid.Row="2" Content="Описание:" Style="{StaticResource RegularLabel}" HorizontalAlignment="Left"/>
+                <TextBlock Name="CompanyDescription" Grid.Row="3" Style="{StaticResource PostSummary}" TextWrapping="Wrap" MaxWidth="400" HorizontalAlignment="Left"/>
+            </Grid>
+
+            <oxy:PlotView Grid.Row="1" Grid.Column="1" Name="PricePlot" Model="{Binding }" Background="Transparent"/>
+
+            <Label Style="{StaticResource Header}" Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Center" Content="Годовой отчет" Margin="0 50 0 0"/>
+            <Grid Grid.Row="3" Grid.ColumnSpan="2" Margin="5 15 5 5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label Style="{StaticResource RegularLabel}" Content="Балансовый отчет" HorizontalAlignment="Center"/>
+                <Label Grid.Column="1" Style="{StaticResource RegularLabel}" Content="Денежные потоки" HorizontalAlignment="Center"/>
+                <Label Grid.Column="2" Style="{StaticResource RegularLabel}" Content="Отчет о доходах" HorizontalAlignment="Center"/>
+
+                <Border Grid.Column="0" Grid.Row="1" BorderThickness="0 0 1 0" BorderBrush="White" Margin="0 10 0 0">
+                    <StackPanel>
+                        <Label Style="{StaticResource FinanceHeader}" Content="Текущие обязательства"/>
+                        <Label Name="CurrentLiabilities" Style="{StaticResource FinanceMetrica}" Content="1000000$" Foreground="Crimson"/>
+                        <Label Style="{StaticResource FinanceHeader}" Content="Долгосрочные обязательства"/>
+                        <Label Name="LongLiabilities" Style="{StaticResource FinanceMetrica}" Content="1000000$" Foreground="Crimson"/>
+                        <Label Style="{StaticResource FinanceHeader}" Content="Текущие активы"/>
+                        <Label Name="CurrentAssets"  Style="{StaticResource FinanceMetrica}" Content="1000000$" Foreground="ForestGreen"/>
+                        <Label Style="{StaticResource FinanceHeader}" Content="Долгосрочные активы"/>
+                        <Label Name="LongAssets" Style="{StaticResource FinanceMetrica}" Content="1000000$" Foreground="ForestGreen"/>
+                        <Label Style="{StaticResource FinanceHeader}" Content="Инвестированный капитал" />
+                        <Label Name="InvCap"  Style="{StaticResource FinanceMetrica}" Content="1000000$"/>
+                        <Label Style="{StaticResource FinanceHeader}" Content="Нераспределенная прибыль"/>
+                        <Label Name="RetEarn" Style="{StaticResource FinanceMetrica}" Content="1000000$"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Column="1" Grid.Row="1" BorderThickness="0 0 1 0" BorderBrush="White" Margin="0 10 0 0">
+                    <StackPanel>
+                        <Label Style="{StaticResource FinanceHeader}" Content="Операционный поток"/>
+                        <Label Name="Operating" Style="{StaticResource FinanceMetrica}" Content="1000000$"/>
+                        <Label Style="{StaticResource FinanceHeader}" Content="Финансовый поток"/>
+                        <Label Name="Financing" Style="{StaticResource FinanceMetrica}" Content="1000000$"/>
+                        <Label Style="{StaticResource FinanceHeader}" Content="Инвестиционный поток"/>
+                        <Label Name="Investment"  Style="{StaticResource FinanceMetrica}" Content="1000000$"/>
+                        <Label Style="{StaticResource FinanceHeader}" Content="Изменение денежного потока"/>
+                        <Label Name="Delta" Style="{StaticResource FinanceMetrica}" Content="1000000$"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Column="2" Grid.Row="1" Margin="0 10 0 0">
+                    <StackPanel>
+                        <Label Style="{StaticResource FinanceHeader}" Content="EBITDA"/>
+                        <Label Name="EBITDA" Style="{StaticResource FinanceMetrica}" Content="1000000$"/>
+                        <Label Style="{StaticResource FinanceHeader}" Content="EBIT"/>
+                        <Label Name="EBIT" Style="{StaticResource FinanceMetrica}" Content="1000000$"/>
+                        <Label Style="{StaticResource FinanceHeader}" Content="EBT"/>
+                        <Label Name="EBT"  Style="{StaticResource FinanceMetrica}" Content="1000000$"/>
+                        <Label Style="{StaticResource FinanceHeader}" Content="Прибыль"/>
+                        <Label Name="Net" Style="{StaticResource FinanceMetrica}" Content="1000000$"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+            <Label Grid.Row="4" Grid.ColumnSpan="2" Style="{StaticResource Header}" Content="Метрики" HorizontalAlignment="Center"/>
+            <StackPanel Grid.Row="5" Grid.ColumnSpan="2">
+                <Label Style="{StaticResource FinanceHeader}" Content="P/E"/>
+                <Label Name="pe" Style="{StaticResource FinanceMetrica}" Content="1000000$"/>
+                <Label Style="{StaticResource FinanceHeader}" Content="DPS"/>
+                <Label Name="dps" Style="{StaticResource FinanceMetrica}" Content="1000000$"/>
+                <Label Style="{StaticResource FinanceHeader}" Content="Доходность"/>
+                <Label Name="yield"  Style="{StaticResource FinanceMetrica}" Content="1000000$"/>
+                <Label Style="{StaticResource FinanceHeader}" Content="EPS"/>
+                <Label Name="eps" Style="{StaticResource FinanceMetrica}" Content="1000000$"/>
+                <Label Style="{StaticResource FinanceHeader}" Content="RPS" />
+                <Label Name="rps"  Style="{StaticResource FinanceMetrica}" Content="1000000$"/>
+                <Label Style="{StaticResource FinanceHeader}" Content="ROE"/>
+                <Label Name="roe" Style="{StaticResource FinanceMetrica}" Content="1000000$"/>
+                <Label Style="{StaticResource FinanceHeader}" Content="Beta" />
+                <Label Name="beta"  Style="{StaticResource FinanceMetrica}" Content="1000000$"/>
+                <Label Style="{StaticResource FinanceHeader}" Content="EVR"/>
+                <Label Name="evr" Style="{StaticResource FinanceMetrica}" Content="1000000$"/>
+                <Label Style="{StaticResource FinanceHeader}" Content="ROA"/>
+                <Label Name="roa" Style="{StaticResource FinanceMetrica}" Content="1000000$"/>
+            </StackPanel>
+            <Label Grid.Row="6" Grid.ColumnSpan="2" Content="Какую цену стоит ждать на следующей неделе?" Style="{StaticResource Header}" HorizontalAlignment="Center" Margin="0 10 0 10"/>
+            <Border Grid.Row="7" Grid.ColumnSpan="2" BorderThickness="3" BorderBrush="#ffdb4d" Width="250" Height="150" CornerRadius="30">
+                <Label Name="PredicttedPrice" Style="{StaticResource Header}" FontWeight="Bold" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>
+            <Label Grid.Row="8" Grid.ColumnSpan="2" Style="{StaticResource Header}" Content="Новости компании:" HorizontalAlignment="Center" Margin=" 0 30 0 0"/>
+            <Grid Grid.Row="9" Grid.ColumnSpan="2" Margin="0 15 0 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Button Name="BearishNewsSubmit" Style="{StaticResource NewsTypeSubmit}" Background="Crimson" Click="BearishNewsSubmit_OnClick">
+                    <Image Source="resources/bearish.png" Width="50" Height="50"/>
+                </Button>
+
+                <Button Grid.Column="1" Name="NeutralNewsSubmit" Style="{StaticResource NewsTypeSubmit}" Background="Gray" Click="NeutralNewsSubmit_OnClick">
+                    <Image Source="resources/neutral.png" Width="50" Height="50"/>
+                </Button>
+
+                <Button Grid.Column="2" Name="BullishNewsSubmit" Style="{StaticResource NewsTypeSubmit}" Background="ForestGreen" Click="BullishNewsSubmit_OnClick">
+                    <Image Source="resources/bullish.png" Width="50" Height="50"/>
+                </Button>
+            </Grid>
+
+            <ListBox Grid.Column="0" Name="CompanyNews" Grid.Row="10" Grid.ColumnSpan="2" Style="{StaticResource NewsFeed}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <DockPanel HorizontalAlignment="Center">
+                                <Image Name="PostBanner" Source="resources/default_post_banner.jpg" Height="100" Width="200" Stretch="Uniform" MaxHeight="400" HorizontalAlignment="Center" Initialized="PostBanner_OnInitialized"/>
+                            </DockPanel>
+                            <Label Grid.Row="1" Name="PostTitle"  Style="{StaticResource RegularLabel}" MaxWidth="300" ClipToBounds="True" Initialized="PostTitle_OnInitialized" HorizontalAlignment="Center"/>
+                            <TextBlock Grid.Row="2" Name="PostSummary" Style="{StaticResource PostSummary}" MaxWidth="250" TextWrapping="Wrap" HorizontalAlignment="Left" Initialized="PostSummary_OnInitialized"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+    </ScrollViewer>
+</Page>

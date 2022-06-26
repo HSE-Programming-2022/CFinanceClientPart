@@ -5,7 +5,54 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>resources\logo_icon.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="resources\bearish.png" />
+    <None Remove="resources\bullish.png" />
+    <None Remove="resources\default_post_banner.jpg" />
+    <None Remove="resources\logo.png" />
+    <None Remove="resources\logo_icon.ico" />
+    <None Remove="resources\neutral.png" />
+    <None Remove="resources\no-wifi.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="resources\logo_icon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="resources\logo_icon.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\neutral.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="OxyPlot.Core" Version="2.1.0" />
+    <PackageReference Include="OxyPlot.Wpf" Version="2.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="resources\bearish.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\bullish.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\default_post_banner.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\logo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\no-wifi.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\CFinance.Core\CFinance.Core.csproj" />

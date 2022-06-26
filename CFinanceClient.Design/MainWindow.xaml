@@ -5,24 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CFinanceClient.Design"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <TextBox Name="LoginField" Grid.Row="0" Width="200" Height="30"></TextBox>
-        <TextBox Name="PasswordField" Grid.Row="1" Width="200" Height="30"></TextBox>
-        <Button Name="Login" Click="Login_OnClick" Grid.Row="2" Width="100" Height="50">Login</Button>
-        <Label Name="Test" Grid.Row="3"/>
-
-        <TextBox Name="CompanyTicker" Grid.Row="0" Grid.Column="1" Width="200" Height="30"/>
-        <Button Name="SearchCompany" Grid.Row="2" Grid.Column="1" Width="100" Height="50" Click="SearchCompany_OnClick" Content="Search"/>
-    </Grid>
+        Title="CFinance"
+        SizeToContent="WidthAndHeight"
+        Width="1000" Height="600"
+        MaxHeight="1000"
+        Background="#202020">
+    <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
 </Window>

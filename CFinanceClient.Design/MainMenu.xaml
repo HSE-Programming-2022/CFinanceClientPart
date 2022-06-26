@@ -1,0 +1,139 @@
+﻿<Page x:Class="CFinanceClient.Design.MainMenu"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CFinanceClient.Design"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="950"
+      Height="1000"
+      Title="MainMenu">
+
+    <Grid Background="#202020">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Label Name="WelcomeLabel" Style="{StaticResource RegularLabel}" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Light"/>
+        <Button Name="ToProfile" Grid.Row="0" Style="{StaticResource RegularButton}" Width="70" Grid.Column="1" HorizontalAlignment="Right" Content="Профиль" Click="ToProfile_OnClick"/>
+            <Label Content="Новости:" Style="{StaticResource Header}" Grid.Row="1" Grid.Column="0"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Name="SearchField" Style="{StaticResource InputField}"  Width="Auto" TextChanged="SearchField_OnTextChanged" GotFocus="SearchField_OnGotFocus" LostFocus="SearchField_OnLostFocus" Margin="10  0 10 0"/>
+        
+        <ListBox Grid.Column="0" Name="NewsFeed" Grid.Row="2" Grid.RowSpan="2" Style="{StaticResource NewsFeed}" ItemsSource="{Binding Source={}}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <EventSetter Event="MouseDoubleClick" Handler="News_OnHandler"/>
+                </Style>
+            </ListBox.ItemContainerStyle>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <DockPanel>
+                            <Image Name="PostBanner" Source="resources/default_post_banner.jpg" Height="100" Width="200" Stretch="Uniform" MaxHeight="400" HorizontalAlignment="Stretch" Initialized="PostBanner_OnInitialized"/>
+                        </DockPanel>
+                        <Label Grid.Row="1" Name="PostTitle"  Style="{StaticResource RegularLabel}" Initialized="PostTitle_OnInitialized" MaxWidth="300" ClipToBounds="True" HorizontalAlignment="Stretch"/>
+                        <TextBlock Grid.Row="2" Name="PostSummary" Style="{StaticResource PostSummary}" Initialized="PostSummary_OnInitialized" MaxWidth="250" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Stretch"/>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Grid Grid.Row="2" Grid.Column="1" MaxHeight="800">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+        
+            <ListBox Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Name="CompanyList" Style="{StaticResource CompanyCards}" BorderThickness="0 0 0 0">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Columns="3"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <EventSetter Event="MouseDoubleClick" Handler="EventSetter_OnHandler"></EventSetter>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Width="120" Height="90" Background="#181818" BorderThickness="1,1,1,1" CornerRadius="8">
+                            <StackPanel Background="Transparent">
+                                <Label Name="CompanyTicker" Style="{StaticResource CompanyTicker}" Foreground="White" Initialized="CompanyTicker_OnInitialized"/>
+                                <Label Name="CompanyName" Style="{StaticResource CompanyName}" Foreground="White" Initialized="CompanyName_OnInitialized"/>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ListBox>
+            
+            <Label Style="{StaticResource Header}" Content="Портфели" Grid.Row="1"/>
+            <Grid Grid.Row="2" Height="300">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <ListBox Height="300" Grid.Row="0"  Name="Portfolios" Style="{StaticResource CompanyCards}" BorderThickness="0 0 0 0"   ItemsSource="{Binding}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Columns="3"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ListBox.ItemContainerStyle>
+                        <Style x:Name="PortfolioWindow" TargetType="ListBoxItem">
+                            <EventSetter Event="MouseDoubleClick" Handler="PortfolioView_OnHandler"/>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Label Style="{StaticResource FinanceMetrica}" Content="{Binding Name}"/>
+                                <Border Grid.Row="1"  Background="#181818" BorderThickness="1,1,1,1" CornerRadius="8">
+                                    <Border.Effect>
+                                        <DropShadowEffect
+                                        ShadowDepth="4"
+                                        Direction="330"
+                                        Color="Yellow"
+                                        Opacity="0.2"
+                                        BlurRadius="4">
+                                        </DropShadowEffect>
+                                    </Border.Effect>
+                                    <ListBox Name="PortfolioCard" ItemsSource="{Binding Companies}" Background="Transparent" BorderThickness="0 0 0 0">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Label Style="{StaticResource FinanceMetrica}" HorizontalAlignment="Center" Content="{Binding TickerView}"/>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ListBox>
+                                </Border>
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ListBox>
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Button Grid.Row="1" Name="AddPortfolio" Style="{StaticResource RegularButton}" Grid.Column="2" Content="Добавить" HorizontalContentAlignment="Center" FontSize="15" Height="15"  Click="AddPortfolio_OnClick"/>
+                    <TextBox Grid.Row="0" Name="NewPortfolioNameField" Style="{StaticResource InputField}" Height="20" Grid.Column="1"/>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>
