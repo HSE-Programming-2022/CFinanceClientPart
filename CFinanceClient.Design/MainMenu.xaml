@@ -22,7 +22,7 @@
         <Label Name="WelcomeLabel" Style="{StaticResource RegularLabel}" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Light"/>
         <Button Name="ToProfile" Grid.Row="0" Style="{StaticResource RegularButton}" Width="70" Grid.Column="1" HorizontalAlignment="Right" Content="Профиль" Click="ToProfile_OnClick"/>
             <Label Content="Новости:" Style="{StaticResource Header}" Grid.Row="1" Grid.Column="0"/>
-        <TextBox Grid.Row="1" Grid.Column="1" Name="SearchField" Style="{StaticResource InputField}"  Width="Auto" TextChanged="SearchField_OnTextChanged" GotFocus="SearchField_OnGotFocus" LostFocus="SearchField_OnLostFocus" Margin="10  0 10 0"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Name="SearchField" Style="{StaticResource InputField}"  Width="Auto" TextChanged="SearchField_OnTextChanged" GotFocus="SearchField_OnGotFocus" LostFocus="SearchField_OnLostFocus" Margin="10  0 10 0" Text="Поиск"/>
         
         <ListBox Grid.Column="0" Name="NewsFeed" Grid.Row="2" Grid.RowSpan="2" Style="{StaticResource NewsFeed}" ItemsSource="{Binding Source={}}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <ListBox.ItemContainerStyle>
@@ -32,17 +32,19 @@
             </ListBox.ItemContainerStyle>
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Grid>
+                    <Grid HorizontalAlignment="Stretch" Margin="0 0 0 10">
                         <Grid.RowDefinitions>
                             <RowDefinition/>
                             <RowDefinition/>
                             <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <DockPanel>
-                            <Image Name="PostBanner" Source="resources/default_post_banner.jpg" Height="100" Width="200" Stretch="Uniform" MaxHeight="400" HorizontalAlignment="Stretch" Initialized="PostBanner_OnInitialized"/>
+                            <Image Name="PostBanner" Source="resources/default_post_banner.jpg" Height="100" Width="200" Stretch="Uniform" MaxHeight="400" HorizontalAlignment="Center" Initialized="PostBanner_OnInitialized"/>
                         </DockPanel>
-                        <Label Grid.Row="1" Name="PostTitle"  Style="{StaticResource RegularLabel}" Initialized="PostTitle_OnInitialized" MaxWidth="300" ClipToBounds="True" HorizontalAlignment="Stretch"/>
-                        <TextBlock Grid.Row="2" Name="PostSummary" Style="{StaticResource PostSummary}" Initialized="PostSummary_OnInitialized" MaxWidth="250" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Stretch"/>
+                        <Label Grid.Row="1" Name="PostTitle"  Style="{StaticResource RegularLabel}" Initialized="PostTitle_OnInitialized" MaxWidth="300" ClipToBounds="True" HorizontalAlignment="Center"/>
+                        <TextBlock Grid.Row="2" Name="PostSummary" Style="{StaticResource PostSummary}" Initialized="PostSummary_OnInitialized" MaxWidth="250" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                        <Rectangle Grid.Row="3" Style="{StaticResource Separator}"/>
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>

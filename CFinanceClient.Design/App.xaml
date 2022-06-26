@@ -212,5 +212,11 @@
         <Style TargetType="{x:Type ScrollBar}">
             <Setter Property="Template" Value="{StaticResource VerticalScrollBar}"/>
         </Style>
+
+        <Style x:Key="Separator" TargetType="Rectangle">
+            <Setter Property="Width" Value="3"/>
+            <Setter Property="Fill" Value="White"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        </Style>
     </Application.Resources>
 </Application>

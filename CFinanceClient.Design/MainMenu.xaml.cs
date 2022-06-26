@@ -154,16 +154,12 @@ namespace CFinanceClient.Design
         {
             string queryString = SearchField.Text.ToLower();
 
-            if ((!queryString.IsNullOrEmpty()) && (queryString != "Поиск"))
+            if ((queryString != "") && (queryString != "поиск"))
             {
                 List<Company> queryResult =
                     companies.FindAll(x => x.Name.ToLower().Contains(queryString) || x.Ticker.ToLower().Contains(queryString));
 
                 CompanyList.ItemsSource = queryResult;
-            }
-            else
-            {
-                CompanyList.ItemsSource = this.companies;
             }
         }
 
@@ -213,8 +209,9 @@ namespace CFinanceClient.Design
         private void PortfolioView_OnHandler(object sender, MouseButtonEventArgs e)
         {
             Portfolio selectedPortfolio = Portfolios.SelectedItem as Portfolio;
+            var containedTickers = selectedPortfolio.Companies.Select(x => x.Ticker);
 
-            List<string> availableCompanies = (from x in companies select x.Ticker).ToList();
+            List<string> availableCompanies = companies.Select(x => x.Ticker).Where(x => !containedTickers.Contains(x)).ToList();
 
             PortfolioWindow newPortfolioWindow = new PortfolioWindow(selectedPortfolio, availableCompanies);
 

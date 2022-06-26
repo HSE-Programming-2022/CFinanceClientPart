@@ -137,7 +137,7 @@ namespace CFinanceClient.Design
             EBT.Content = SumToView(SelectedCompany.IncomeStatement.EBT);
             Net.Content = SumToView(SelectedCompany.IncomeStatement.NetEarnings);
 
-
+            dps.Content = SelectedCompany.Metrics.dps.ToString();
             pe.Content = SelectedCompany.Metrics.pe.ToString();
             rps.Content = SelectedCompany.Metrics.rps.ToString();
             eps.Content = SelectedCompany.Metrics.eps.ToString();
