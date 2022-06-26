@@ -42,6 +42,8 @@ namespace CFinanceClient.Design
 
             LoginButton.Visibility = Visibility.Visible;
             RegistrationButton.Visibility = Visibility.Collapsed;
+
+            Error.Visibility = Visibility.Hidden;
         }
 
         private void RegisterMode_OnClick(object sender, RoutedEventArgs e)
@@ -57,6 +59,8 @@ namespace CFinanceClient.Design
 
             LoginButton.Visibility = Visibility.Collapsed;
             RegistrationButton.Visibility = Visibility.Visible;
+
+            Error.Visibility = Visibility.Hidden;
         }
 
         private async void LoginButton_OnClick(object sender, RoutedEventArgs e)
@@ -66,7 +70,7 @@ namespace CFinanceClient.Design
 
             if (userLogin.IsEmpty() || userPassword.IsEmpty())
             {
-                Error.Content = "Заполните все обязательные поля";
+                Error.Content = "Заполните все поля";
                 Error.Visibility = Visibility.Visible;
             }
             else
@@ -83,7 +87,7 @@ namespace CFinanceClient.Design
                 }
                 else
                 {
-                    Error.Visibility = Visibility.Collapsed;
+                    Error.Visibility = Visibility.Hidden;
                     LoginButton.Content = user.UserID;
 
                     MainMenu menu = new MainMenu(user);
@@ -95,11 +99,23 @@ namespace CFinanceClient.Design
 
         private async void RegistrationButton_OnClick(object sender, RoutedEventArgs e)
         {
+            string userLogin = RegLoginField.Text;
+            string userPassword = RegPasswordField.Password;
+            string userEmail = RegEmailField.Text;
+
+            if (userLogin.IsEmpty() || userPassword.IsEmpty() || userEmail.IsEmpty())
+            {
+                Error.Content = "Заполните все поля";
+                Error.Visibility = Visibility.Visible;
+                return;
+
+            }
+
             User newUser = new User()
             {
-                Email = RegEmailField.Text,
-                Password = RegPasswordField.Password,
-                UserName = RegLoginField.Text
+                Email = userEmail,
+                Password = userPassword,
+                UserName = userLogin
             };
 
             bool response = await UserSession.RegisterUser(newUser);
@@ -112,9 +128,8 @@ namespace CFinanceClient.Design
                     );
 
                 MainMenu menu = new MainMenu(registeredUser);
-                NavigationService nav = NavigationService.GetNavigationService(this);
-                
-                nav.Navigate(menu);
+
+                _mainFrame.Navigate(menu);
             }
             else
             {
@@ -123,7 +138,7 @@ namespace CFinanceClient.Design
             }
         }
 
-        private void RepeatPasswordField_OnPasswordChanged(object sender, RoutedEventArgs e)
+        private void PasswordField_OnPasswordChanged(object sender, RoutedEventArgs e)
         {
             if (RepeatPasswordField.Password != RegPasswordField.Password)
             {
@@ -134,8 +149,24 @@ namespace CFinanceClient.Design
             }
             else
             {
-                Error.Visibility = Visibility.Collapsed;
+                Error.Visibility = Visibility.Hidden;
                 RegistrationButton.IsEnabled = true;
+            }
+        }
+
+        private void Page_KeyDown(object sender, KeyEventArgs e)
+        {
+
+            if (e.Key == Key.Enter)
+            {
+               if (RegistrationButton.Visibility == Visibility.Visible)
+               {
+                    RegistrationButton_OnClick(null, null);
+               }
+               else
+               {
+                    LoginButton_OnClick(null, null);
+               }
             }
         }
     }

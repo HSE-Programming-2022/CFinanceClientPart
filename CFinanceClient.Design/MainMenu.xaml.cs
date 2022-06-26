@@ -142,7 +142,6 @@ namespace CFinanceClient.Design
 
                 psi.UseShellExecute = true;
                 psi.FileName = selectedPost.PostUrl;
-                System.Diagnostics.Process.Start(psi);
 
                 if (selectedPost != null)
                 {

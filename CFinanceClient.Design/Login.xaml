@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:CFinanceClient.Design"
       mc:Ignorable="d" 
       d:DesignHeight="800" d:DesignWidth="1000"
-      Title="Login">
+      Title="Login" KeyDown="Page_KeyDown">
 
     <Grid Background="#181818">
         <Grid.RowDefinitions>
@@ -24,7 +24,7 @@
             </Grid.ColumnDefinitions>
 
             <Button Name="LoginMode" Grid.Column="0" Style="{StaticResource ToggleButton}" Content="Войти" Click="LoginMode_OnClick" VerticalAlignment="Center"/>
-            <Button Name="RegisterMode" Grid.Column="1" Style="{StaticResource ToggleButton}" BorderThickness="0 0 0 0"  Content="Регистрация" Click="RegisterMode_OnClick"/>
+            <Button Name="RegisterMode" Grid.Column="1" Style="{StaticResource ToggleButton}" BorderThickness="0 0 0 0"  Content="Регистрация" Click="RegisterMode_OnClick" VerticalAlignment="Center"/>
         </Grid>
 
         <StackPanel Grid.Row="2" Name="RegistrationPanel" Width="500" Visibility="Collapsed">
@@ -38,17 +38,17 @@
             </StackPanel>
             <StackPanel Orientation="Vertical">
                 <Label Style="{StaticResource RegularLabel}" VerticalAlignment="Bottom" Content="Пароль:" HorizontalAlignment="Center"/>
-                <PasswordBox Name="RegPasswordField" Style="{StaticResource PasswordField}" Width="300" Height="30"/>
+                <PasswordBox Name="RegPasswordField" Style="{StaticResource PasswordField}" Width="300" Height="30" PasswordChanged="PasswordField_OnPasswordChanged"/>
             </StackPanel>
             <StackPanel Orientation="Vertical">
                 <Label Style="{StaticResource RegularLabel}" VerticalAlignment="Bottom" Content="Повторите пароль:" HorizontalAlignment="Center"/>
-                <PasswordBox Name="RepeatPasswordField" Style="{StaticResource PasswordField}" Width="300" Height="30" PasswordChanged="RepeatPasswordField_OnPasswordChanged"/>
+                <PasswordBox Name="RepeatPasswordField" Style="{StaticResource PasswordField}" Width="300" Height="30" PasswordChanged="PasswordField_OnPasswordChanged"/>
             </StackPanel>
         </StackPanel>
 
-        <StackPanel Grid.Row="2" Name="LoginPanel">
+        <StackPanel Grid.Row="2" Name="LoginPanel" Width="500">
             <StackPanel Orientation="Vertical">
-                <Label Style="{StaticResource RegularLabel}" VerticalAlignment="Bottom" Content="Логин:" HorizontalAlignment="Center"/>
+                <Label Style="{StaticResource RegularLabel}" Content="Логин:" HorizontalAlignment="Center"/>
                 <TextBox Name="LoginField" Style="{StaticResource InputField}" Width="300" Height="30" Margin=" 0 30 0 30"/>
             </StackPanel>
             <StackPanel Orientation="Vertical">
@@ -57,9 +57,9 @@
             </StackPanel>
         </StackPanel>
 
-        <Label Name="Error" Grid.Row="3" Style="{StaticResource ErrorSign}" Visibility="Collapsed"/>
-        <Button Style="{StaticResource RegularButton}" Name="LoginButton" Grid.Row="4" Width="100" Height="40" Content="Вход" Click="LoginButton_OnClick"/>
-        <Button Style="{StaticResource RegularButton}" Name="RegistrationButton" Grid.Row="4" Width="130" Height="40" Content="Зарегистрироваться" Visibility="Collapsed" Click="RegistrationButton_OnClick"/>
+        <Label Name="Error" Grid.Row="3" Style="{StaticResource ErrorSign}" Margin="0 5 0 5" HorizontalAlignment="Center" Visibility="Hidden" Content=""/>
+        <Button Style="{StaticResource RegularButton}" Name="LoginButton" Grid.Row="4" Width="100" Height="40" VerticalAlignment="Top" Content="Вход" Click="LoginButton_OnClick"/>
+        <Button Style="{StaticResource RegularButton}" Name="RegistrationButton" Grid.Row="4" Width="130" Height="40" VerticalAlignment="Top" Content="Зарегистрироваться" Visibility="Collapsed" Click="RegistrationButton_OnClick"/>
 
         <DockPanel>
             <Frame x:Name="_mainFrame" />
